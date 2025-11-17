@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
+import GameEditor from '@/components/GameEditor';
 
 interface Game {
   id: number;
@@ -126,7 +127,7 @@ const Index = () => {
         )}
 
         {activeTab === 'editor' && (
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div className="text-center space-y-4">
               <h2 className="text-5xl font-bold text-neon-purple text-glow-purple animate-pulse-glow">
                 3D Редактор игр
@@ -136,64 +137,7 @@ const Index = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-              <div className="lg:col-span-1 space-y-4">
-                <Card className="p-4 border-neon-purple/30 bg-card/80 backdrop-blur">
-                  <h3 className="text-lg font-bold text-neon-purple mb-4">Инструменты</h3>
-                  <div className="space-y-2">
-                    <Button variant="outline" className="w-full justify-start border-neon-purple/30 hover:border-neon-purple">
-                      <Icon name="Box" className="mr-2" size={18} />
-                      Куб
-                    </Button>
-                    <Button variant="outline" className="w-full justify-start border-neon-purple/30 hover:border-neon-purple">
-                      <Icon name="Circle" className="mr-2" size={18} />
-                      Сфера
-                    </Button>
-                    <Button variant="outline" className="w-full justify-start border-neon-purple/30 hover:border-neon-purple">
-                      <Icon name="Triangle" className="mr-2" size={18} />
-                      Конус
-                    </Button>
-                    <Button variant="outline" className="w-full justify-start border-neon-purple/30 hover:border-neon-purple">
-                      <Icon name="Lightbulb" className="mr-2" size={18} />
-                      Свет
-                    </Button>
-                  </div>
-                </Card>
-
-                <Card className="p-4 border-neon-cyan/30 bg-card/80 backdrop-blur">
-                  <h3 className="text-lg font-bold text-neon-cyan mb-4">Свойства</h3>
-                  <div className="space-y-3 text-sm">
-                    <div>
-                      <label className="text-muted-foreground">Позиция X</label>
-                      <input type="number" className="w-full bg-muted/50 border border-neon-cyan/20 rounded px-2 py-1 mt-1" defaultValue={0} />
-                    </div>
-                    <div>
-                      <label className="text-muted-foreground">Позиция Y</label>
-                      <input type="number" className="w-full bg-muted/50 border border-neon-cyan/20 rounded px-2 py-1 mt-1" defaultValue={0} />
-                    </div>
-                    <div>
-                      <label className="text-muted-foreground">Позиция Z</label>
-                      <input type="number" className="w-full bg-muted/50 border border-neon-cyan/20 rounded px-2 py-1 mt-1" defaultValue={0} />
-                    </div>
-                  </div>
-                </Card>
-              </div>
-
-              <div className="lg:col-span-3">
-                <Card className="border-neon-purple/30 bg-card/50 backdrop-blur overflow-hidden h-[600px] relative glow-purple">
-                  <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/10 to-neon-purple/10 flex items-center justify-center">
-                    <div className="text-center space-y-4">
-                      <div className="relative">
-                        <Icon name="Box" size={120} className="text-neon-purple/50 animate-float" />
-                        <div className="absolute inset-0 blur-xl bg-neon-purple/30 animate-pulse-glow" />
-                      </div>
-                      <p className="text-neon-cyan text-xl font-bold">3D Viewport</p>
-                      <p className="text-muted-foreground">Выбери объект слева, чтобы начать</p>
-                    </div>
-                  </div>
-                </Card>
-              </div>
-            </div>
+            <GameEditor />
 
             <div className="flex justify-center gap-4">
               <Button size="lg" className="bg-neon-purple hover:bg-neon-purple/80 text-white font-bold glow-purple">
