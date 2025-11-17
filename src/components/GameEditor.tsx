@@ -1,8 +1,7 @@
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Grid, Sky } from '@react-three/drei';
-import { useState, Suspense } from 'react';
+import { OrbitControls, Grid } from '@react-three/drei';
+import { useState } from 'react';
 import RobloxCharacter from './RobloxCharacter';
-import * as THREE from 'three';
 
 interface GameObject {
   id: string;
@@ -202,41 +201,41 @@ const GameEditor = () => {
           camera={{ position: [10, 10, 10], fov: 50 }}
           gl={{ antialias: true }}
         >
-          <Suspense fallback={null}>
-            <Sky sunPosition={[100, 20, 100]} />
-            <ambientLight intensity={0.5} />
-            <directionalLight
-              position={[10, 10, 5]}
-              intensity={1}
-              castShadow
-              shadow-mapSize-width={2048}
-              shadow-mapSize-height={2048}
+          <color attach="background" args={['#87CEEB']} />
+          <fog attach="fog" args={['#87CEEB', 30, 100]} />
+          
+          <ambientLight intensity={0.6} />
+          <directionalLight
+            position={[10, 10, 5]}
+            intensity={1}
+            castShadow
+            shadow-mapSize-width={2048}
+            shadow-mapSize-height={2048}
+          />
+
+          <Grid 
+            args={[100, 100]} 
+            cellSize={1} 
+            cellThickness={0.5} 
+            cellColor="#0EA5E9" 
+            sectionSize={5} 
+            sectionThickness={1} 
+            sectionColor="#8B5CF6" 
+            fadeDistance={50} 
+            fadeStrength={1}
+            infiniteGrid
+          />
+
+          {objects.map(obj => (
+            <GameObject3D 
+              key={obj.id} 
+              obj={obj} 
+              isSelected={obj.id === selectedObjectId}
+              onClick={() => setSelectedObjectId(obj.id)}
             />
+          ))}
 
-            <Grid 
-              args={[100, 100]} 
-              cellSize={1} 
-              cellThickness={0.5} 
-              cellColor="#0EA5E9" 
-              sectionSize={5} 
-              sectionThickness={1} 
-              sectionColor="#8B5CF6" 
-              fadeDistance={50} 
-              fadeStrength={1}
-              infiniteGrid
-            />
-
-            {objects.map(obj => (
-              <GameObject3D 
-                key={obj.id} 
-                obj={obj} 
-                isSelected={obj.id === selectedObjectId}
-                onClick={() => setSelectedObjectId(obj.id)}
-              />
-            ))}
-
-            <OrbitControls makeDefault />
-          </Suspense>
+          <OrbitControls makeDefault />
         </Canvas>
       </div>
     </div>

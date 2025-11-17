@@ -1,12 +1,8 @@
-import { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 const RobloxCharacter = ({ position = [0, 2, 0] }: { position?: [number, number, number] }) => {
-  const groupRef = useRef<THREE.Group>(null);
-
   return (
-    <group ref={groupRef} position={position}>
+    <group position={position}>
       <mesh position={[0, 1.5, 0]} castShadow>
         <boxGeometry args={[0.8, 1, 0.4]} />
         <meshStandardMaterial color="#0EA5E9" />
